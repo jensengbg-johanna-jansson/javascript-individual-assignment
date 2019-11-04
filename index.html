@@ -4,10 +4,88 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/styles.css">
+        <link href="https://fonts.googleapis.com/css?family=Poppins:400,900&display=swap" rel="stylesheet">
         <title>Awesome Gallery</title>
     </head>
     <body>
-        
+        <header class="header--container">
+            <nav class="menu--container">
+                <a href="index.html" class="menu__item">Home</a>
+                <a href="" class="menu__item">Popular Photos</a>
+                <a href="" class="menu__item">Recent Uploads</a>
+                <a href="" class="menu__item LoggedOut">My Saved Photos</a>
+
+                <button>Log In</button>
+                <div class="login--container" hidden>
+                    <h2>Log In</h2>
+                    <label for="">Email:</label>
+                    <input type="text">
+
+                    <label for="">Password</label>
+                    <input type="password">
+                    <a href="">Forgot your password?</a>
+                    <button>Log In</button>
+
+                    <span>Don't have an account?</span>
+                    <a href="">Sign up!</a>
+                </div>
+            </nav>
+            <section class="header--content--container">
+                <h1>Awesome Gallery</h1>
+                <div class="search--container">
+                    <label for="search--input" class="search--input__label">What are you looking for?</label>
+                    <input type="text" name="search--input" class="search--input">
+                    <button class="search--btn">O</button>     
+                </div>        
+            </section>
+        </header>
+        <main class="main--container">
+            <nav class="filter--container">
+                <select name="sortFilter" id="">
+                    <option value="relevance">Relevance</option>
+                    <option value="dateNew">Uploaded New</option>
+                    <option value="dateOld">Uploaded Old</option>
+                </select>
+                <select name="pageFilter" id="">
+                    <option value="20">20</option>
+                    <option value="20">50</option>
+                    <option value="20">100</option>
+                </select>
+            </nav>
+            <ul class="photo--container">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+
+            <div class="backToTop"><p>v</p></div>
+        </main>
+        <footer class="footer--container">
+            <div class="footer--sitemap">
+                <p>Our Site</p>
+                <ul class="footer--sitemap--nav">
+                    <li><a href="">About</a></li>
+                    <li><a href="">Help</a></li>
+                    <li><a href="">Contact</a></li>
+                    <li><a href="">Terms & Conditions</a></li>
+                    <li><a href="">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <p>&copy;Awesome Gallery</p>
+        </footer>
+
+        <div class="largeIMG--container" hidden>
+            <div class="largeIMG"></div>
+        </div>        
+    
         <script src="js/index.js"></script>
     </body>
 </html>
