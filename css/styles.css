@@ -12,26 +12,37 @@ body {
 }
 
 h1 {
-    margin-bottom: 3rem;
+    font-size: 3rem;
+    color: #ffffff;
+    text-shadow: 1px 1px 1px #360A5F, 2px 2px 1px #360A5F, 3px 3px 1px #360A5F, 4px 4px 2px #360A5F, 5px 5px 1px #360A5F, 5px 5px 0 #360A5F;
+}
+
+h1 a {
+    color: #ffffff;
+    text-decoration: none;
 }
 
 .header--container, .footer--container {
-    width: 100vw;
+    width: 100%;
 }
 
 .header--container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-image: url("../img/color-2326315_1920.jpg");
+    background-size: cover;
+    background-position: center center;
+
 }
 
 /* */
 /* Menu */
 
 .menu--container {
-    height: 50px;
+    height: 70px;
     width: 100%;
-    background: lightblue;
+    background: rgba(0, 0, 0, 0.4);
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -41,6 +52,10 @@ h1 {
 .menu__item {
     color: #ffffff;
     text-decoration: none;
+    transition: color 0.2s;
+}
+.menu__item:hover {
+    color: #FF7F6C;
 }
 
 .login--container {
@@ -54,12 +69,8 @@ h1 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-image: url("../img/color-2326315_1920.jpg");
-    background-size: cover;
-    background-position: center center;
     width: 100%;
     height: 75vh;
-    padding: 4rem 0;
 
     -webkit-transition: height 1s ease-out;
     -moz-transition: height 1s ease-out;
@@ -73,19 +84,22 @@ h1 {
 
 .search--container {
     width: 75vw;
+    max-width: 720px;
+
 }
 
 .search--input__label {
     display: block;
+    margin-left: 25px;
 }
 
 .search--input {
     width: 80%;
-    padding: 0.8rem;
+    padding: 0.8rem 1.5rem;
     font-size: 1.5rem;
     border: none;
     box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.4);
-    border-radius: 0.2rem;
+    border-radius: 50px;
 }
 
 
@@ -110,7 +124,9 @@ h1 {
     margin: 0.5rem;
     width: 150px;
     height: 150px;
-    background: lightsalmon;
+}
+.photo--container li:hover {
+    cursor: pointer;
 }
 
 .largeIMG--container {
@@ -152,6 +168,24 @@ h1 {
 .footer--container {
     background: #360A5F;
     padding: 2rem;
+}
+
+.footer--container article {
+    margin: 0.8rem 0;
+}
+
+.footer--container li {
+    margin: 0.5rem 1rem;
+}
+
+.footer--container a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.footer__heading {
+    color: #ffffff;
+    text-shadow: 1px 1px 1px #CE1A57, 2px 2px 0 #CE1A57;
 }
 
 .footer--sitemap {
@@ -208,6 +242,8 @@ h1 {
     border: 4px solid #FF7F6C;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
     border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.5s, border-color 0.5s;
 }
 .button:hover {
     background: #E63261;
@@ -218,6 +254,39 @@ h1 {
     background: #CE1A57;
     color: #ffffff;
     border: 4px solid #CE1A57;
+}
+
+.button--long {
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    border: 2px solid;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.button--long.filled {
+    background: #FF7F6C;
+    color: #ffffff;
+    border-color: #FF7F6C;
+    transition: background-color 0.5s, border-color 0.5s;
+}
+.button--long.filled:hover {
+    background: #E63261;
+    color: #ffffff;
+    border-color: #E63261;
+}
+
+.button--long.unfilled {
+    background: #ffffff;
+    color: #FF7F6C;
+    border-color: #FF7F6C;
+    transition: background-color 0.3s, border-color 0.5s, color 0.3s;
+}
+.button--long.unfilled:hover {
+    background: #FF7F6C;
+    color: #ffffff;
+    border-color: #ffffff;
 }
 
 

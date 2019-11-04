@@ -28,13 +28,11 @@ function changeImgPerPage() {
     console.log(imgPerPage);
 }
 
-function optionClick() {
-    let optionItems = document.querySelectorAll('.option__item');
-    for (i=0; i < optionItems.length; i++) {
-        optionItems[i].addEventListener('click', function(){console.log('hej');});
-    }    
+function optionChange() {
+    let perPage = document.querySelector('.imgPerPage');
+    perPage.addEventListener('change', function(){console.log(perPage.value);});  
 }
-optionClick();
+optionChange();
 
 /*
 async function getSearchResult() {
