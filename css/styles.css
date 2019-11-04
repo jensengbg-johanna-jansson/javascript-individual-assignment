@@ -15,10 +15,6 @@ h1 {
     margin-bottom: 3rem;
 }
 
-button {
-    cursor: pointer;
-}
-
 .header--container, .footer--container {
     width: 100vw;
 }
@@ -57,11 +53,23 @@ button {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: url("../img/pawel-czerwinski-8uZPynIu-rQ-unsplash.jpg");
+    justify-content: center;
+    background-image: url("../img/color-2326315_1920.jpg");
     background-size: cover;
+    background-position: center center;
     width: 100%;
+    height: 75vh;
     padding: 4rem 0;
+
+    -webkit-transition: height 1s ease-out;
+    -moz-transition: height 1s ease-out;
+    transition: height 1s ease-out;
 }
+
+.header--content--container.collapse {
+    height: 20vh;
+}
+
 
 .search--container {
     width: 75vw;
@@ -71,19 +79,13 @@ button {
     display: block;
 }
 
-.search--input, .search--btn {
+.search--input {
+    width: 80%;
     padding: 0.8rem;
     font-size: 1.5rem;
-}
-
-.search--input {
-    width: 89%;
-}
-
-.search--btn {
-    border-radius: 50px;
-    border: 2px solid darkgray;
-
+    border: none;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.4);
+    border-radius: 0.2rem;
 }
 
 
@@ -94,13 +96,6 @@ button {
 .main--container {
     max-width: 90vw;
 }
-
-
-.footer--container {
-    background: lightskyblue;
-    padding: 2rem;
-}
-
 
 .photo--container {
     width: 100%;
@@ -125,6 +120,8 @@ button {
     left: 0;
     width: 100%;
     height: 100%;
+    display: none;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background: rgba(0, 0, 0, 0.4);
@@ -134,30 +131,96 @@ button {
     background: #ffffff;
     padding: 1rem;
     box-shadow: 0 0 20px #000000;
-}
-
-.backToTop {
-    width: 50px;
-    height: 50px;
-    background: #ffffff;
-    border: 2px solid #000000;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-    
-    position: fixed;
-    bottom: 30px;
-    right: 20px;
+    flex-direction: column;
+    border-radius: 0.2rem;
 }
 
-.backToTop p {
-    font-size: 2rem;
+.close__btn {
+    background: #000000;
+    color: #ffffff;
+    border: 1px solid #ffffff;
     font-weight: bold;
-    transform: rotate(180deg);
+    border-radius: 50px;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    top: -30px;
+    right: 0px;
+}
+
+.footer--container {
+    background: #360A5F;
+    padding: 2rem;
+}
+
+.footer--sitemap {
+    display: grid;
+    grid-template-areas: 'site legal'
+    'siteHelp legal';
+}
+
+.footer--sitemap--site {
+    grid-area: site;
+}
+
+.footer--sitemap--help {
+    grid-area: siteHelp;
+}
+
+.footer--sitemap--legal {
+    grid-area: legal;
 }
 
 .footer--sitemap--nav {
     list-style-type: none;
 }
+
+/* */
+/* Buttons */
+/* */
+.backToTop__btn {    
+    position: fixed;
+    bottom: 30px;
+    right: 20px;
+}
+
+.close__btn {
+    background: #000000;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    font-weight: bold;
+    border-radius: 50px;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    top: -30px;
+    right: 0px;
+}
+
+.button {
+    width: 50px;
+    height: 50px;
+    font-size: 1.8rem;
+
+    background: #FF7F6C;
+    color: #ffffff;
+    border: 4px solid #FF7F6C;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+    border-radius: 50px;
+}
+.button:hover {
+    background: #E63261;
+    color: #ffffff;
+    border: 4px solid #E63261;
+}
+.button:active {
+    background: #CE1A57;
+    color: #ffffff;
+    border: 4px solid #CE1A57;
+}
+
+
+/* */
+/* Loader */
+/* */

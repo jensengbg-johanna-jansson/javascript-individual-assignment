@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/styles.css">
         <link href="https://fonts.googleapis.com/css?family=Poppins:400,900&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/dfc5fca1d3.js" crossorigin="anonymous"></script>
         <title>Awesome Gallery</title>
     </head>
     <body>
@@ -35,7 +36,7 @@
                 <div class="search--container">
                     <label for="search--input" class="search--input__label">What are you looking for?</label>
                     <input type="text" name="search--input" class="search--input">
-                    <button class="search--btn">O</button>     
+                    <button class="search__btn button"><i class="fas fa-search"></i></button>     
                 </div>        
             </section>
         </header>
@@ -46,46 +47,49 @@
                     <option value="dateNew">Uploaded New</option>
                     <option value="dateOld">Uploaded Old</option>
                 </select>
-                <select name="pageFilter" id="">
-                    <option value="20">20</option>
-                    <option value="20">50</option>
-                    <option value="20">100</option>
+                <select name="pageFilter" class="imgPerPage">
+                    <option class="option__item" value="20">20</option>
+                    <option class="option__item" value="50">50</option>
+                    <option class="option__item" value="100">100</option>
                 </select>
             </nav>
             <ul class="photo--container">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
             </ul>
 
-            <div class="backToTop"><p>v</p></div>
+            <button class="backToTop__btn button"><i class="fas fa-angle-double-up"></i></button>
         </main>
         <footer class="footer--container">
             <div class="footer--sitemap">
-                <p>Our Site</p>
-                <ul class="footer--sitemap--nav">
-                    <li><a href="">About</a></li>
-                    <li><a href="">Help</a></li>
-                    <li><a href="">Contact</a></li>
-                    <li><a href="">Terms & Conditions</a></li>
-                    <li><a href="">Privacy Policy</a></li>
-                </ul>
+                <article class="footer--sitemap--site">
+                    <h2>Our Site</h2>
+                    <ul class="footer--sitemap--nav">
+                        <li><a href="">Home</a></li>
+                        <li><a href="">About Us</a></li>
+                        <li><a href="">Contact</a></li>
+                    </ul>   
+                </article>
+                <article class="footer--sitemap--help">
+                    <h2>Help</h2>
+                    <ul class="footer--sitemap--nav">
+                        <li><a href="">Help center</a></li>
+                    </ul>        
+                </article>
+                <article class="footer--sitemap--legal">
+                    <h2>Legal</h2>
+                    <ul class="footer--sitemap--nav">
+                        <li><a href="">Terms & Conditions</a></li>
+                        <li><a href="">Privacy Policy</a></li>
+                    </ul>        
+                </article>
             </div>
             <p>&copy;Awesome Gallery</p>
         </footer>
 
-        <div class="largeIMG--container" hidden>
-            <div class="largeIMG"></div>
-        </div>        
-    
+        <div class="largeIMG--container">
+            <div class="largeIMG">
+                <button class="close__btn"><i class="fas fa-times"></i></button>
+            </div>
+        </div>       
         <script src="js/index.js"></script>
     </body>
 </html>
