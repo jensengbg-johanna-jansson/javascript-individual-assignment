@@ -11,13 +11,17 @@
     <body>
         <header class="header--container">
             <nav class="menu--container">
-                <a href="index.html" class="menu__item">Home</a>
-                <a href="" class="menu__item">Browse</a>
+                <div class="menu--wrapper">
+                    <a href="index.html" class="menu__link menu__item menu__hidden">Home</a>
+                    <a href="" class="menu__link menu__item menu__hidden">Browse</a>
+    
+                    <h1><a href="index.html">Awesome Gallery</a></h1>
+    
+                    <button class="button--long unfilled menu__item menu__hidden">Log In</button>
+                    <button class="button--long filled menu__item menu__hidden">Sign Up</button>        
+                </div>
+                <button class="hamburger__menu"><i class="fas fa-bars"></i></button>
 
-                <h1><a href="index.html">Awesome Gallery</a></h1>
-
-                <button class="button--long unfilled">Log In</button>
-                <button class="button--long filled">Sign Up</button>
                 <div class="login--container" hidden>
                     <h2>Log In</h2>
                     <label for="">Email:</label>
@@ -53,6 +57,7 @@
                     <option class="option__item" value="100">100</option>
                 </select>
             </nav>
+
             <ul class="photo--container">
             </ul>
 
@@ -63,22 +68,22 @@
                 <article class="footer--sitemap--site">
                     <h2 class="footer__heading">Our Site</h2>
                     <ul class="footer--sitemap--nav">
-                        <li><a href="">Home</a></li>
-                        <li><a href="">About Us</a></li>
-                        <li><a href="">Contact</a></li>
+                        <li><a href="" class="menu__link">Home</a></li>
+                        <li><a href="" class="menu__link">About Us</a></li>
+                        <li><a href="" class="menu__link">Contact</a></li>
                     </ul>   
                 </article>
                 <article class="footer--sitemap--help">
                     <h2 class="footer__heading">Help</h2>
                     <ul class="footer--sitemap--nav">
-                        <li><a href="">Help center</a></li>
+                        <li><a href="" class="menu__link">Help center</a></li>
                     </ul>        
                 </article>
                 <article class="footer--sitemap--legal">
                     <h2 class="footer__heading">Legal</h2>
                     <ul class="footer--sitemap--nav">
-                        <li><a href="">Terms & Conditions</a></li>
-                        <li><a href="">Privacy Policy</a></li>
+                        <li><a href="" class="menu__link">Terms & Conditions</a></li>
+                        <li><a href="" class="menu__link">Privacy Policy</a></li>
                     </ul>        
                 </article>
             </div>
@@ -87,7 +92,15 @@
 
         <div class="largeIMG--container">
             <div class="largeIMG">
-                <button class="close__btn"><i class="fas fa-times"></i></button>
+                <button class="close__btn button"><i class="fas fa-times"></i></button>
+            
+                <div class="loader loader--hidden">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>       
             </div>
         </div>       
         <script src="js/index.js"></script>

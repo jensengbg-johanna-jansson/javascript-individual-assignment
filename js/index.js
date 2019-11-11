@@ -1,3 +1,18 @@
+/* Mobile menu display manipulation */
+function toggleMobileMenu() {
+    let menuItem = document.querySelectorAll('.menu__item');
+    let menuIcon = document.querySelector('i');
+
+    menuIcon.classList.toggle("fa-bars");
+    menuIcon.classList.toggle("fa-times");
+
+    for(i=0; i < menuItem.length; i++) {
+        menuItem[i].classList.toggle("menu__hidden");
+    }
+}
+document.querySelector('.hamburger__menu').addEventListener('click', toggleMobileMenu);
+
+
 /* Placeholder randomizer function */
 function placeholderRandomizer() {
     let inputBox = document.querySelector('.search--input');
@@ -9,54 +24,49 @@ function placeholderRandomizer() {
 }
 placeholderRandomizer();
 
+
 /* Front Page popular photos view */
 function getPopularPhotos() {
+    loader();
+
         // Create search URL
-    const URL = 'https://www.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=19d3e6e0acfe9c438f368e2c2bab1c5d&format=json&nojsoncallback=1&per_page=20';
+    const URL2 = 'https://www.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=19d3e6e0acfe9c438f368e2c2bab1c5d&format=json&nojsoncallback=1&safe_search=1&per_page=20';
+    const URL = 'https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=19d3e6e0acfe9c438f368e2c2bab1c5d&text=nature&format=json&nojsoncallback=1&sort=relevance&per_page=20';
+
     photoResult(URL);
 }
+getPopularPhotos();
 
+
+/* */
 /* Search function */
+/* */
+
     // Get filter information
 function getImgPerPage() {
     let perPage = document.querySelector('.imgPerPage').value;
+    console.log(perPage);
     return perPage;
 }
+document.querySelector('.imgPerPage').addEventListener('change', getImgPerPage);
 
-function changeImgPerPage() {
-    let imgPerPage = getImgPerPage();
-    console.log(imgPerPage);
-}
-
-function optionChange() {
-    let perPage = document.querySelector('.imgPerPage');
-    perPage.addEventListener('change', function(){console.log(perPage.value);});  
-}
-optionChange();
-
-/*
-async function getSearchResult() {
-    //Hämta användarens söksträng
-    let searchString = document.querySelector('.search--input').value;
-    console.log(searchString);
-
-    const URL = 'https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=19d3e6e0acfe9c438f368e2c2bab1c5d&text=' + searchString + '&format=json&nojsoncallback=1';
-
-    // Hämta söksvar från Flickr
-    let response = await fetch(URL, {method: 'GET'});
-    let data = await response.json();
-    console.log(response);
-    
-    return await response;
-}
-*/
 
 function collapseHeader() {
     let headerContainer = document.querySelector('.header--content--container');
     headerContainer.classList.add('collapse');
 }
 
+function loader() {
+    let photoContainer = document.querySelector('.photo--container');
+    let loaderIcon = document.querySelector('.loader');
+
+    photoContainer.classList.toggle('fade');
+    loaderIcon.classList.toggle('loader--hidden');
+}
+
+    //Search function
 function getSearchResult(searchInput) {
+    loader();
     collapseHeader();
         // Get search string
     let searchString = document.querySelector('.search--input').value;
@@ -65,7 +75,7 @@ function getSearchResult(searchInput) {
     console.log(imgPerPage);
 
         // Create search URL
-    const URL = 'https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=19d3e6e0acfe9c438f368e2c2bab1c5d&text=' + searchString + '&format=json&nojsoncallback=1&per_page=' + imgPerPage;
+    const URL = 'https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=19d3e6e0acfe9c438f368e2c2bab1c5d&text=' + searchString + '&format=json&nojsoncallback=1&sort=relevance&per_page=' + imgPerPage;
     photoResult(URL);
 }
 
@@ -110,21 +120,26 @@ function photoResult(URL) {
             li.appendChild(img);
             ul.appendChild(li);
         }
+        loader();
 
     }).catch(function(error) {
         console.log('THIS IS AN ERROR', error);
     });
 }
 
+
+// Lightbox
+function loader2() {
+    let loaderIcon = document.querySelector('.loader');
+
+    loaderIcon.classList.toggle('loader--hidden');
+}
+
+
 function photoEnlarge (imgURL) {
     let img = document.createElement('img');
     let largeIMG = document.querySelector('.largeIMG');
     let largeImgContainer = document.querySelector('.largeIMG--container');
-
-    function closeLightBox(){
-        largeImgContainer.style.display = 'none';
-        largeIMG.removeChild(document.querySelector('.largeIMG__img'));
-    }
 
     let photoSize = '_c';
     const largeImgURL = imgURL + photoSize + '.jpg';
@@ -137,11 +152,34 @@ function photoEnlarge (imgURL) {
     largeIMG.appendChild(img);
 
         //Close the lightbox
+    function closeLightBox(){
+        largeImgContainer.style.display = 'none';
+        
+        if (document.querySelector('.largeIMG__img')) {
+            largeIMG.removeChild(document.querySelector('.largeIMG__img'));
+        }
+    }
     largeImgContainer.addEventListener('click', closeLightBox);
     document.querySelector('.close__btn').addEventListener('click', closeLightBox);
 }
 
-getPopularPhotos();
-
 document.querySelector('.search__btn').addEventListener('click', getSearchResult);
 document.querySelector('.backToTop__btn').addEventListener('click', function(){window.scrollTo(0, 0);});
+
+
+/*
+async function getSearchResult() {
+    //Hämta användarens söksträng
+    let searchString = document.querySelector('.search--input').value;
+    console.log(searchString);
+
+    const URL = 'https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=19d3e6e0acfe9c438f368e2c2bab1c5d&text=' + searchString + '&format=json&nojsoncallback=1';
+
+    // Hämta söksvar från Flickr
+    let response = await fetch(URL, {method: 'GET'});
+    let data = await response.json();
+    console.log(response);
+    
+    return await response;
+}
+*/
