@@ -33,7 +33,6 @@ h1 a {
     background-image: url("../img/color-2326315_1920.jpg");
     background-size: cover;
     background-position: center center;
-
 }
 
 /* */
@@ -127,6 +126,13 @@ h1 a {
     cursor: pointer;
 }
 
+.photo--container img {
+    transition: all 0.4s ease-in-out;
+}
+.photo--container img:hover {
+    transform: scale(1.2);
+}
+
 .largeIMG--container {
     z-index: 1;
     position: fixed;
@@ -194,6 +200,11 @@ h1 a {
 
 .footer--sitemap--nav {
     list-style-type: none;
+}
+
+.copyright {
+    color: #ffffff;
+    font-size: 0.8rem;
 }
 
 /* Menu links */
@@ -277,6 +288,10 @@ h1 a {
     background: #FF7F6C;
     color: #ffffff;
     border-color: #ffffff;
+}
+
+.hidden__elem {
+    display: none;
 }
 
 

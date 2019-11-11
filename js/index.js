@@ -1,5 +1,6 @@
 /* Mobile menu display manipulation */
-function toggleMobileMenu() {
+/*
+toggleMobileMenu = () => {
     let menuItem = document.querySelectorAll('.menu__item');
     let menuIcon = document.querySelector('i');
 
@@ -11,10 +12,14 @@ function toggleMobileMenu() {
     }
 }
 document.querySelector('.hamburger__menu').addEventListener('click', toggleMobileMenu);
+*/
+
+import * as mobileMenu from 'mobileMenu.js';
+document.querySelector('.hamburger__menu').addEventListener('click', mobileMenu.toggleMobileMenu);
 
 
 /* Placeholder randomizer function */
-function placeholderRandomizer() {
+placeholderRandomizer = () => {
     let inputBox = document.querySelector('.search--input');
     let placeholderArray = ['flowers','abstract','cats','nature','technology','business','architecture'];
 
@@ -26,7 +31,7 @@ placeholderRandomizer();
 
 
 /* Front Page popular photos view */
-function getPopularPhotos() {
+getPopularPhotos = () => {
     loader();
 
         // Create search URL
@@ -79,6 +84,7 @@ function getSearchResult(searchInput) {
     photoResult(URL);
 }
 
+
 function photoResult(URL) {    
         //Get the search result
     fetch(URL, {
@@ -126,6 +132,13 @@ function photoResult(URL) {
         console.log('THIS IS AN ERROR', error);
     });
 }
+document.querySelector('.search--input').addEventListener('keyup', function(event) {
+    if (event.keyCode === 13) {
+        getSearchResult();
+    }
+});
+document.querySelector('.search__btn').addEventListener('click', getSearchResult);
+
 
 
 // Lightbox
@@ -135,13 +148,29 @@ function loader2() {
     loaderIcon.classList.toggle('loader--hidden');
 }
 
+function getPhotoSize() {
+    let screenWidth = window.innerWidth;
+    let photoSize = '';
+
+    if(screenWidth <= 350) {
+        photoSize = '_n';
+    } else if(screenWidth > 350 && screenWidth <= 650) {
+        photoSize = '_z';
+    } else if(screenWidth > 650 && screenWidth <= 1080) {
+        photoSize = '_b';
+    } else if(screenWidth > 1080) {
+        photoSize = '_k';
+    }
+    return photoSize;
+}
+
 
 function photoEnlarge (imgURL) {
     let img = document.createElement('img');
     let largeIMG = document.querySelector('.largeIMG');
     let largeImgContainer = document.querySelector('.largeIMG--container');
 
-    let photoSize = '_c';
+    let photoSize = getPhotoSize();
     const largeImgURL = imgURL + photoSize + '.jpg';
     console.log(largeImgURL);
 
@@ -163,8 +192,9 @@ function photoEnlarge (imgURL) {
     document.querySelector('.close__btn').addEventListener('click', closeLightBox);
 }
 
-document.querySelector('.search__btn').addEventListener('click', getSearchResult);
 document.querySelector('.backToTop__btn').addEventListener('click', function(){window.scrollTo(0, 0);});
+
+
 
 
 /*
