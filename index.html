@@ -32,20 +32,32 @@
         </header>
         <main class="main--container">
             <nav class="filter--container">
-                <select name="sortFilter" id="">
-                    <option value="relevance">Relevance</option>
-                    <option value="dateNew">Uploaded New</option>
-                    <option value="dateOld">Uploaded Old</option>
+                <label>Sort by:</label>
+                <select name="sortFilter" class="sortBy">
+                    <option class="sort__item" value="relevance">Relevance</option>
+                    <option class="sort__item" value="date-posted-asc">Date uploaded asc</option>
+                    <option class="sort__item" value="date-posted-desc">Date uploaded desc</option>
+                    <option class="sort__item" value="date-taken-asc">Date taken asc</option>
+                    <option class="sort__item" value="date-taken-desc">Date taken desc</option>
                 </select>
+                <span class="filter--divider"> | </span>
                 <select name="pageFilter" class="imgPerPage">
                     <option class="option__item" value="20">20</option>
                     <option class="option__item" value="50">50</option>
                     <option class="option__item" value="100">100</option>
                 </select>
+                <label>per page</label>
             </nav>
 
-            <ul class="photo--container">
-            </ul>
+            <div class="loader loader--hidden">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="photo--container"></ul>
+
 
             <button class="backToTop__btn button"><i class="fas fa-angle-double-up"></i></button>
         </main>
@@ -78,17 +90,9 @@
 
         <div class="largeIMG--container">
             <div class="largeIMG">
-                <button class="close__btn button"><i class="fas fa-times"></i></button>
-            
-                <div class="loader loader--hidden">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>       
+                <button class="close__btn button"><i class="fas fa-times"></i></button>      
             </div>
         </div>       
-        <script src="js/index.js"></script>
+        <script type="module" src="js/index.js"></script>
     </body>
 </html>

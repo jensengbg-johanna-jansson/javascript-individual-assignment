@@ -1,215 +1,170 @@
-/* Mobile menu display manipulation */
-/*
-toggleMobileMenu = () => {
-    let menuItem = document.querySelectorAll('.menu__item');
-    let menuIcon = document.querySelector('i');
+import placeholder from './placeholder.js';
+import mobileMenu from './mobileMenu.js';
+import headerEffect from './headerEffects.js';
+import loading from './loading.js';
 
-    menuIcon.classList.toggle("fa-bars");
-    menuIcon.classList.toggle("fa-times");
-
-    for(i=0; i < menuItem.length; i++) {
-        menuItem[i].classList.toggle("menu__hidden");
-    }
-}
-document.querySelector('.hamburger__menu').addEventListener('click', toggleMobileMenu);
-*/
-
-import * as mobileMenu from 'mobileMenu.js';
+// Add event listener to hamburger menu
 document.querySelector('.hamburger__menu').addEventListener('click', mobileMenu.toggleMobileMenu);
 
+// Add the random placeholder
+placeholder.placeholderRandomizer();
 
-/* Placeholder randomizer function */
-placeholderRandomizer = () => {
-    let inputBox = document.querySelector('.search--input');
-    let placeholderArray = ['flowers','abstract','cats','nature','technology','business','architecture'];
-
-    let randNumber = Math.floor(Math.random() * Math.floor(placeholderArray.length));
-
-    inputBox.setAttribute('placeholder', placeholderArray[randNumber] + '...');
-}
-placeholderRandomizer();
-
-
-/* Front Page popular photos view */
-getPopularPhotos = () => {
-    loader();
-
-        // Create search URL
-    const URL2 = 'https://www.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=19d3e6e0acfe9c438f368e2c2bab1c5d&format=json&nojsoncallback=1&safe_search=1&per_page=20';
-    const URL = 'https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=19d3e6e0acfe9c438f368e2c2bab1c5d&text=nature&format=json&nojsoncallback=1&sort=relevance&per_page=20';
-
-    photoResult(URL);
-}
-getPopularPhotos();
+// Add event listener for back to top function
+document.querySelector('.backToTop__btn').addEventListener('click', function(){window.scrollTo(0, 0);});
 
 
 /* */
 /* Search function */
 /* */
+function getSearchResult(buttonClick) {
+    //start loading function
+    loading.loader();
+    
+    // Only collapse header if button click
+    if(buttonClick === 1) {
+        // start functin for collapsing header
+        headerEffect.collapseHeader();
+    }
 
-    // Get filter information
-function getImgPerPage() {
-    let perPage = document.querySelector('.imgPerPage').value;
-    console.log(perPage);
-    return perPage;
-}
-document.querySelector('.imgPerPage').addEventListener('change', getImgPerPage);
-
-
-function collapseHeader() {
-    let headerContainer = document.querySelector('.header--content--container');
-    headerContainer.classList.add('collapse');
-}
-
-function loader() {
-    let photoContainer = document.querySelector('.photo--container');
-    let loaderIcon = document.querySelector('.loader');
-
-    photoContainer.classList.toggle('fade');
-    loaderIcon.classList.toggle('loader--hidden');
-}
-
-    //Search function
-function getSearchResult(searchInput) {
-    loader();
-    collapseHeader();
-        // Get search string
+    // Get search string
     let searchString = document.querySelector('.search--input').value;
-    let imgPerPage = getImgPerPage();
-    console.log(searchString);
-    console.log(imgPerPage);
+    // Get number of images per page that is currently chosen
+    let imgPerPage = document.querySelector('.imgPerPage').value;
+    let sortImages = document.querySelector('.sortBy').value;
+    // Declare URL variable
+    let URL;
 
-        // Create search URL
-    const URL = 'https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=19d3e6e0acfe9c438f368e2c2bab1c5d&text=' + searchString + '&format=json&nojsoncallback=1&sort=relevance&per_page=' + imgPerPage;
+    // If there is no search string URL is same as getPopularPhotos URL. Otherwise URL uses the search string
+    if(searchString === '' || null) {
+        // Create URL with Flickr API getRecent
+        URL = 'https://www.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=19d3e6e0acfe9c438f368e2c2bab1c5d&format=json&nojsoncallback=1&safe_search=1&per_page=' + imgPerPage;
+    } else {
+        // Create search URL with the search string
+        URL = 'https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=19d3e6e0acfe9c438f368e2c2bab1c5d&text=' + searchString + '&format=json&nojsoncallback=1&sort=' + sortImages + '&per_page=' + imgPerPage;
+    }
+
+    // Send URL to photoresult function
     photoResult(URL);
 }
+// Call function to display most recent images when enter website
+getSearchResult(0);
 
-
-function photoResult(URL) {    
-        //Get the search result
-    fetch(URL, {
-        method: 'GET'
-    }).then(function(response) {
-        return response.json();
-    }).then(function(data) {
-        console.log(data);
-        let ul = document.querySelector('.photo--container');
-            //Remove all the images already inside the ul
-        while (ul.hasChildNodes()) {  
-            ul.removeChild(ul.firstChild);
-        } 
-
-            //Loop through the search result and add images to HTML
-        for (i=0; i<data.photos.photo.length; i++) {
-                // Create LI and IMG tags
-            let li = document.createElement('li');
-            let img = document.createElement('img');
-                // set info needed for the image url
-            let photoID = data.photos.photo[i].id;
-            let farmId = data.photos.photo[i].farm;
-            let photoSecret = data.photos.photo[i].secret;
-            let photoServer = data.photos.photo[i].server;
-            let photoSize = '_q';
-                // create image url
-            const imgURL = 'https://farm' + farmId + '.staticflickr.com/' + photoServer + '/' + photoID + '_' + photoSecret;
-            const thumbImgURL = imgURL+ photoSize + '.jpg';
-
-                //set attrinutes to html-tags
-            li.setAttribute('class', 'photo__item');
-            img.setAttribute('src', thumbImgURL);
-
-            img.addEventListener('click', function() {
-                photoEnlarge(imgURL);
-            });
-
-                // add LI and IMG tags to page
-            li.appendChild(img);
-            ul.appendChild(li);
-        }
-        loader();
-
-    }).catch(function(error) {
-        console.log('THIS IS AN ERROR', error);
-    });
-}
+// Set event listeners for search button, search input and filters
 document.querySelector('.search--input').addEventListener('keyup', function(event) {
     if (event.keyCode === 13) {
-        getSearchResult();
+        getSearchResult(1);
     }
 });
-document.querySelector('.search__btn').addEventListener('click', getSearchResult);
+document.querySelector('.search__btn').addEventListener('click', function(){getSearchResult(1)});
+document.querySelector('.imgPerPage').addEventListener('change', getSearchResult);
+document.querySelector('.sortBy').addEventListener('change', getSearchResult);
 
 
 
-// Lightbox
-function loader2() {
-    let loaderIcon = document.querySelector('.loader');
+/* */
+/* Flickr fetch function */
+/* */
+async function photoResult(URL) {
+    // Get response from Flickr
+    let response = await fetch(URL, {method: 'GET'});
+    let data = await response.json();
 
-    loaderIcon.classList.toggle('loader--hidden');
+    // Get photo container ul
+    let ul = document.querySelector('.photo--container');
+    //Remove all images that are already inside the ul
+    while (ul.hasChildNodes()) {  
+        ul.removeChild(ul.firstChild);
+    } 
+
+    //Loop through the search result for adding images to HTML
+    for (let i=0; i<data.photos.photo.length; i++) {
+        // Create li and img tags
+        let li = document.createElement('li');
+        let img = document.createElement('img');
+            
+        // Set variables for data needed for the image url
+        let photoID = data.photos.photo[i].id;
+        let farmId = data.photos.photo[i].farm;
+        let photoSecret = data.photos.photo[i].secret;
+        let photoServer = data.photos.photo[i].server;
+        let photoSize = '_q';
+            
+        // create image url
+        const imgURL = 'https://farm' + farmId + '.staticflickr.com/' + photoServer + '/' + photoID + '_' + photoSecret;
+        const thumbImgURL = imgURL + photoSize + '.jpg';
+
+        //set attrinutes and classes to html-tags
+        li.setAttribute('class', 'photo__item');
+        img.setAttribute('src', thumbImgURL);
+
+        // Add eventlistener to every images
+        img.addEventListener('click', function() {
+            photoEnlarge(imgURL);
+        });
+
+        // add li and img tags to page
+        li.appendChild(img);
+        ul.appendChild(li);
+    }
+    // End loader animation
+    loading.loader();
+    
+    return await response;
 }
 
+/* */
+/* Lightbox */
+/* */
+
 function getPhotoSize() {
+    // Get screen width and declare photoSize variable
     let screenWidth = window.innerWidth;
     let photoSize = '';
 
+    // Set photoSize value based on screen width
     if(screenWidth <= 350) {
         photoSize = '_n';
     } else if(screenWidth > 350 && screenWidth <= 650) {
         photoSize = '_z';
-    } else if(screenWidth > 650 && screenWidth <= 1080) {
+    } else if(screenWidth > 650) {
         photoSize = '_b';
-    } else if(screenWidth > 1080) {
-        photoSize = '_k';
     }
     return photoSize;
 }
 
-
 function photoEnlarge (imgURL) {
+    // Create img tag
     let img = document.createElement('img');
+    // Get lightbox container
     let largeIMG = document.querySelector('.largeIMG');
     let largeImgContainer = document.querySelector('.largeIMG--container');
-
+    // Set photo size
     let photoSize = getPhotoSize();
+    // Create image url
     const largeImgURL = imgURL + photoSize + '.jpg';
-    console.log(largeImgURL);
 
+    // Set img class and url
     img.setAttribute('src', largeImgURL);
     img.setAttribute('class', 'largeIMG__img');
+    
+    // Display lightbox
     largeImgContainer.style.display = 'flex';
 
+    // Add img to html
     largeIMG.appendChild(img);
 
-        //Close the lightbox
+    //Lightbox close function
     function closeLightBox(){
+        // Hide lightbox
         largeImgContainer.style.display = 'none';
         
+        // Remove img tag from lightbox
         if (document.querySelector('.largeIMG__img')) {
             largeIMG.removeChild(document.querySelector('.largeIMG__img'));
         }
     }
+
+    // Add event listeners for closing lightbox
     largeImgContainer.addEventListener('click', closeLightBox);
     document.querySelector('.close__btn').addEventListener('click', closeLightBox);
 }
-
-document.querySelector('.backToTop__btn').addEventListener('click', function(){window.scrollTo(0, 0);});
-
-
-
-
-/*
-async function getSearchResult() {
-    //Hämta användarens söksträng
-    let searchString = document.querySelector('.search--input').value;
-    console.log(searchString);
-
-    const URL = 'https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=19d3e6e0acfe9c438f368e2c2bab1c5d&text=' + searchString + '&format=json&nojsoncallback=1';
-
-    // Hämta söksvar från Flickr
-    let response = await fetch(URL, {method: 'GET'});
-    let data = await response.json();
-    console.log(response);
-    
-    return await response;
-}
-*/

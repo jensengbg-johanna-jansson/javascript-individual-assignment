@@ -108,13 +108,23 @@ h1 a {
     position: relative;
 }
 
+.filter--container {
+    margin: 0.5rem;
+}
+
+.filter--divider {
+    margin: 0 1rem;
+}
+
 .photo--container {
     width: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-evenly;
     list-style-type: none;
+
+    transition: opacity 0.25s ease-in-out;
 }
 
 .photo--container li {
@@ -393,5 +403,7 @@ h1 a {
         font-size: 2rem;
         color: #ffffff;
         align-self: flex-start;
+        background: none;
+        border: none;
     }
 }
